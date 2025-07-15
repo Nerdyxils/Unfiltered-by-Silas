@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import "./UnfilteredLandingPage.css";
 import silasLogo from '../assets/silas_logo.png';
+import { useNavigate } from "react-router-dom";
 
 const mailerLiteEmbedHtml = `
   <style type="text/css">@import url('https://assets.mlcdn.com/fonts.css?version=1752130');</style>
@@ -37,6 +38,7 @@ const mailerLiteEmbedHtml = `
 `;
 
 const UnfilteredLandingPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [quote, setQuote] = useState({ content: "", author: "" });
   const [submitted, setSubmitted] = useState(false);
@@ -62,7 +64,27 @@ const UnfilteredLandingPage = () => {
       script.async = true;
       document.body.appendChild(script);
     }
-  }, []);
+    // Intercept MailerLite form submission and redirect on success
+    const interval = setInterval(() => {
+      const form = document.querySelector('#mlb2-28436674 form');
+      if (form && !form.dataset.listenerAdded) {
+        form.dataset.listenerAdded = 'true';
+        form.addEventListener('submit', function () {
+          // DO NOT preventDefault!
+          const observer = new MutationObserver(() => {
+            const success = document.querySelector('.ml-form-successBody.row-success');
+            if (success && success.style.display !== 'none') {
+              navigate('/success');
+              observer.disconnect();
+            }
+          });
+          observer.observe(form.parentElement.parentElement, { childList: true, subtree: true });
+        });
+        clearInterval(interval);
+      }
+    }, 300);
+    return () => clearInterval(interval);
+  }, [navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
