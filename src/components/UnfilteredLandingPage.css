@@ -2,13 +2,14 @@ html, body {
   width: 100vw;
   min-height: 100vh;
   overflow-x: hidden;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
 }
 
 body {
   margin: 0;
   background-color: #000;
   color: #fff;
-  font-family: 'Inter', sans-serif;
+  font-family: 'Space Grotesk', 'Inter', sans-serif;
 }
 
 .container {
@@ -77,6 +78,10 @@ body {
   outline: none;
   background: #1a1a1a;
   color: #fff;
+}
+
+header {
+  margin-bottom: 1.2rem;
 }
 
 .form button {
@@ -172,7 +177,7 @@ body {
   color: #ef2d56;
   line-height: 1;
   letter-spacing: 0.02em;
-  font-family: 'Poppins', 'Inter', sans-serif;
+  font-family: 'Clash Display', 'Space Grotesk', 'Inter', sans-serif;
   text-shadow: 0 2px 12px rgba(0,0,0,0.13);
 }
 

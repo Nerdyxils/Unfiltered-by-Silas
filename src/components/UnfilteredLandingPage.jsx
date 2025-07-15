@@ -146,7 +146,7 @@ const UnfilteredLandingPage = () => {
             <NewsletterForm onSuccess={() => setSuccess(true)} />
           </section>
           <div className="quote" style={{ marginTop: "2.5rem" }}>
-            <div className="quote-heading">Quote for Your Soul</div>
+            <div className="quote-heading">Chew on This</div>
             <div>
               {quote.content && (
                 <>
