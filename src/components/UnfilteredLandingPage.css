@@ -291,3 +291,54 @@ body {
     margin-top: 64px;
   }
 }
+
+/* Override MailerLite injected form */
+.ml-embedded input[type="email"] {
+    background: #1a1a1a !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 6px;
+    padding: 1.2rem !important;
+    font-size: 1.15rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .ml-embedded input[type="submit"],
+  .ml-embedded button[type="submit"] {
+    background: #3B8A7F !important;
+    color: #fff !important;
+    font-weight: bold;
+    border: none !important;
+    border-radius: 6px;
+    cursor: pointer;
+    padding: 1.2rem !important;
+    font-size: 1.15rem;
+    width: 100%;
+    transition: background 0.3s ease;
+  }
+  
+  .ml-embedded input[type="submit"]:hover,
+  .ml-embedded button[type="submit"]:hover {
+    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%) !important;
+    filter: brightness(1.08);
+  }
+  
+  .ml-embedded form {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .ml-embedded * {
+    font-family: 'Inter', sans-serif !important;
+  }
+  
+  .ml-form-successBody {
+    color: #3B8A7F !important;
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+  }
+  
