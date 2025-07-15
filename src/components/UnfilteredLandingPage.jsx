@@ -8,16 +8,26 @@ function NewsletterForm({ onSuccess }) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState("idle"); // idle | loading | error
   const [error, setError] = useState("");
+  const [honeypot, setHoneypot] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("loading");
     setError("");
 
+    // If honeypot is filled, treat as spam and do not submit
+    if (honeypot) {
+      setStatus("error");
+      setError("Spam detected. Please try again.");
+      return;
+    }
+
     const formData = new URLSearchParams();
     formData.append("fields[email]", email);
     formData.append("ml-submit", "1");
     formData.append("anticsrf", "true");
+    // Optionally include honeypot field for backend logging
+    formData.append("website", honeypot);
 
     try {
       const response = await fetch(MAILERLITE_URL, {
@@ -45,7 +55,20 @@ function NewsletterForm({ onSuccess }) {
   };
 
   return (
-    <form className="form" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit} autoComplete="off">
+      {/* Honeypot field for spam bots, visually hidden from users */}
+      <div style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+        <label htmlFor="website">Website</label>
+        <input
+          type="text"
+          id="website"
+          name="website"
+          tabIndex="-1"
+          autoComplete="off"
+          value={honeypot}
+          onChange={e => setHoneypot(e.target.value)}
+        />
+      </div>
       <input
         type="email"
         name="fields[email]"
