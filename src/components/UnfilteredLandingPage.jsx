@@ -3,6 +3,39 @@ import { motion } from "framer-motion";
 import "./UnfilteredLandingPage.css";
 import silasLogo from '../assets/silas_logo.png';
 
+const mailerLiteEmbedHtml = `
+  <style type="text/css">@import url('https://assets.mlcdn.com/fonts.css?version=1752130');</style>
+  <div id="mlb2-28436674" class="ml-form-embedContainer ml-subscribe-form ml-subscribe-form-28436674">
+    <div class="ml-form-align-center ">
+      <div class="ml-form-embedWrapper embedForm">
+        <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
+          <div class="ml-form-embedContent" style="margin-bottom: 0px;"></div>
+          <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/1667600/forms/160022650035373147/subscribe" method="post">
+            <div class="ml-form-formContent">
+              <div class="ml-form-fieldRow ml-last-item">
+                <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
+                  <input aria-label="email" aria-required="true" type="email" class="form-control" name="fields[email]" placeholder="Email" autocomplete="email" required style="background:#1a1a1a;color:#fff;border-radius:6px;border:none;padding:1.2rem;font-size:1.15rem;width:100%;max-width:100%;box-sizing:border-box;" />
+                </div>
+              </div>
+            </div>
+            <input type="hidden" name="ml-submit" value="1">
+            <div class="ml-form-embedSubmit" style="margin-top:1rem;">
+              <button type="submit" class="primary" style="width:100%;background:#3B8A7F;color:#fff;font-weight:bold;border:none;border-radius:6px;cursor:pointer;padding:1.2rem;font-size:1.15rem;transition:background 0.3s;">Subscribe</button>
+            </div>
+            <input type="hidden" name="anticsrf" value="true">
+          </form>
+        </div>
+        <div class="ml-form-successBody row-success" style="display:none;text-align:center;">
+          <div class="ml-form-successContent">
+            <h4 style="color:#3B8A7F;font-size:2rem;font-weight:700;margin-bottom:0.5rem;">Thank you!</h4>
+            <p style="color:#fff;font-size:1.1rem;">You have successfully joined our subscriber list.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+`;
+
 const UnfilteredLandingPage = () => {
   const [email, setEmail] = useState("");
   const [quote, setQuote] = useState({ content: "", author: "" });
@@ -19,6 +52,16 @@ const UnfilteredLandingPage = () => {
         }
       })
       .catch(() => setQuote({ content: "Couldn't fetch quote.", author: "API Error" }));
+
+    // Dynamically load MailerLite script after HTML is present
+    if (!document.getElementById('mlb2-28436674-script')) {
+      const script = document.createElement('script');
+      script.id = 'mlb2-28436674-script';
+      script.src = 'https://groot.mailerlite.com/js/w/webforms.min.js?v176e10baa5e7ed80d35ae235be3d5024';
+      script.type = 'text/javascript';
+      script.async = true;
+      document.body.appendChild(script);
+    }
   }, []);
 
   const handleSubmit = (e) => {
@@ -54,24 +97,7 @@ const UnfilteredLandingPage = () => {
           </header>
           <p className="cta">Relax, no spam. Just hot takes, weird thoughts, and memes you’ll pretend you didn’t laugh at. You’re curious now, aren’t you?</p>
           <section aria-label="Email signup form" style={{ width: '100%' }}>
-            {submitted ? (
-              <p className="success" role="status">🔥 You're in. Check your inbox soon.</p>
-            ) : (
-              <form onSubmit={handleSubmit} className="form" autoComplete="off">
-                <label htmlFor="email" className="visually-hidden">Email address</label>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  required
-                  onChange={(e) => setEmail(e.target.value)}
-                  aria-label="Email address"
-                  autoComplete="email"
-                />
-                <button type="submit" aria-label="Subscribe to Unfiltered newsletter">Subscribe</button>
-              </form>
-            )}
+            <div dangerouslySetInnerHTML={{ __html: mailerLiteEmbedHtml }} />
           </section>
           <section className="quote" aria-label="Random inspirational quote">
             <div className="quote-heading">Today's Quote</div>
