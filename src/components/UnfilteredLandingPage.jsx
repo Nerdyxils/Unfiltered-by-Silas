@@ -4,9 +4,9 @@ import silasLogo from "../assets/silas_logo.png";
 
 const MAILERLITE_URL = "https://assets.mailerlite.com/jsonp/1667600/forms/160022650035373147/subscribe";
 
-function NewsletterForm() {
+function NewsletterForm({ onSuccess }) {
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [status, setStatus] = useState("idle"); // idle | loading | error
   const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
@@ -29,7 +29,7 @@ function NewsletterForm() {
       });
       const data = await response.json();
       if (data.success) {
-        setStatus("success");
+        if (onSuccess) onSuccess();
       } else {
         setStatus("error");
         setError(
@@ -45,77 +45,30 @@ function NewsletterForm() {
   };
 
   return (
-    <>
-      {/* Overlay and floating success card at bottom right */}
-      {status === "success" && (
-        <>
-          <div style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            width: '100vw',
-            height: '100vh',
-            background: 'rgba(0,0,0,0.18)',
-            zIndex: 1000,
-            pointerEvents: 'none',
-          }} />
-          <div style={{
-            position: 'fixed',
-            bottom: '2.5rem',
-            right: '2.5rem',
-            zIndex: 1100,
-            maxWidth: 360,
-            minWidth: 280,
-            background: 'rgba(30,30,30,0.98)',
-            borderRadius: 18,
-            boxShadow: '0 4px 24px 0 rgba(31,38,135,0.18)',
-            padding: '2rem 1.5rem 1.5rem 1.5rem',
-            textAlign: 'center',
-            color: '#fff',
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            border: '1px solid rgba(255,255,255,0.13)',
-          }}>
-            <img src={silasLogo} alt="Silas Logo" className="nav-logo" style={{ marginBottom: '1.2rem', height: 36 }} />
-            <h1 className="main-title" style={{ color: '#3B8A7F', fontSize: '1.5rem', marginBottom: '0.7rem' }}>Thank you for subscribing!</h1>
-            <p className="cta" style={{ color: '#fff', fontSize: '1rem', marginBottom: '1.2rem' }}>
-              You have successfully joined the Unfiltered newsletter.<br />
-              Check your inbox for a welcome email soon.
-            </p>
-            <a href="/" className="nav-cta" style={{ display: 'inline-block', marginTop: '0.5rem', fontSize: '0.95rem', padding: '0.5rem 1.2rem' }}>
-              Back to Home
-            </a>
-          </div>
-        </>
+    <form className="form" onSubmit={handleSubmit}>
+      <input
+        type="email"
+        name="fields[email]"
+        placeholder="Email"
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        required
+        aria-label="Email"
+        autoComplete="email"
+      />
+      <button type="submit" disabled={status === "loading"}>
+        {status === "loading" ? "Subscribing..." : "Subscribe"}
+      </button>
+      {status === "error" && (
+        <div style={{ color: "red", marginTop: "1rem" }}>{error}</div>
       )}
-      {/* The form is hidden when status is 'success' */}
-      {status !== "success" && (
-        <form className="form" onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="fields[email]"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            aria-label="Email"
-            autoComplete="email"
-          />
-          <button type="submit" disabled={status === "loading"}>
-            {status === "loading" ? "Subscribing..." : "Subscribe"}
-          </button>
-          {status === "error" && (
-            <div style={{ color: "red", marginTop: "1rem" }}>{error}</div>
-          )}
-        </form>
-      )}
-    </>
+    </form>
   );
 }
 
 const UnfilteredLandingPage = () => {
   const [quote, setQuote] = useState({ content: "", author: "" });
+  const [success, setSuccess] = useState(false);
 
   useEffect(() => {
     fetch("https://corsproxy.io/?https://zenquotes.io/api/random")
@@ -132,16 +85,19 @@ const UnfilteredLandingPage = () => {
       );
   }, []);
 
-  if (status === "success") {
+  if (success) {
     return (
       <div className="container">
         <div className="content" style={{ textAlign: 'center' }}>
           <img src={silasLogo} alt="Silas Logo" className="nav-logo" style={{ marginBottom: '1.5rem' }} />
-          <h1 className="main-title" style={{ color: '#3B8A7F', fontSize: '2.5rem', marginBottom: '1rem' }}>Thank you for subscribing!</h1>
-          <p className="cta" style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '2rem' }}>
-            You have successfully joined the Unfiltered newsletter.<br />
-            Check your inbox for a welcome email soon.
-          </p>
+          <h1 className="main-title" style={{ color: '#3B8A7F', fontSize: '2.5rem', marginBottom: '1rem' }}>
+        Congrats! You just joined the coolest newsletter you never asked for.
+        </h1>   
+        <p className="cta" style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '2rem' }}>
+        Get ready for weird thoughts, hot takes, and the occasional meme you’ll pretend didn’t make you laugh.<br />
+        Check your inbox (or spam, if your email’s being dramatic).
+        </p>
+
           <a href="/" className="nav-cta" style={{ display: 'inline-block', marginTop: '1.5rem' }}>
             Back to Home
           </a>
@@ -149,6 +105,7 @@ const UnfilteredLandingPage = () => {
       </div>
     );
   }
+
   return (
     <>
       <nav className="main-nav" aria-label="Main navigation">
@@ -186,7 +143,7 @@ const UnfilteredLandingPage = () => {
             aria-label="Email signup form"
             style={{ width: "100%", minHeight: "180px" }}
           >
-            <NewsletterForm />
+            <NewsletterForm onSuccess={() => setSuccess(true)} />
           </section>
           <div className="quote" style={{ marginTop: "2.5rem" }}>
             <div className="quote-heading">Quote for Your Soul</div>
