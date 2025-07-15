@@ -1,12 +1,45 @@
-# React + Vite
+# Unfiltered by Silas – Newsletter Landing Page
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a modern, branded landing page for the "Unfiltered by Silas" newsletter. Built with React and Vite, it is designed to capture email signups, showcase Silas's creative brand, and provide a seamless, mobile-first user experience.
 
-Currently, two official plugins are available:
+## Features
+- **Custom AJAX Newsletter Signup**: Integrated with MailerLite, including a honeypot field for spam protection.
+- **Modern Responsive Design**: Uses Space Grotesk and Clash Display fonts, glassmorphism effects, and a minimalist dark theme.
+- **Mobile-First**: Fully responsive, optimized for all devices and viewports.
+- **SEO Optimized**: Includes meta tags, Open Graph, Twitter Card, and JSON-LD structured data.
+- **Quote of the Day**: Fetches and displays a random inspirational quote.
+- **SPA Routing**: Uses React Router for smooth navigation and a custom success page.
+- **Deployment Ready**: Works on Netlify, Vercel, and other static hosts (with proper SPA routing support).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech Stack
+- [React](https://react.dev/)
+- [Vite](https://vitejs.dev/)
+- [MailerLite](https://www.mailerlite.com/) (AJAX API)
+- [Framer Motion](https://www.framer.com/motion/) (for subtle animations)
+- [React Router](https://reactrouter.com/)
 
-## Expanding the ESLint configuration
+## Getting Started
+1. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+2. **Run locally:**
+   ```bash
+   npm run dev
+   ```
+3. **Build for production:**
+   ```bash
+   npm run build
+   ```
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Customization
+- Update branding, colors, and copy in `src/components/UnfilteredLandingPage.jsx` and `UnfilteredLandingPage.css`.
+- Fonts are loaded via Google Fonts in `index.html`.
+- SEO and meta tags are in `index.html`.
+
+## Deployment
+- For Netlify: Add a `_redirects` file for SPA routing.
+- For Vercel: Add a `vercel.json` rewrite rule.
+
+## License
+MIT
