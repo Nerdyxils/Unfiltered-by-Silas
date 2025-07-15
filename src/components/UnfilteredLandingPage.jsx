@@ -11,7 +11,7 @@ const mailerLiteEmbedHtml = `
       <div class="ml-form-embedWrapper embedForm">
         <div class="ml-form-embedBody ml-form-embedBodyDefault row-form">
           <div class="ml-form-embedContent" style="margin-bottom: 0px;"></div>
-          <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/1667600/forms/160022650035373147/subscribe" method="post">
+          <form class="ml-block-form" action="https://assets.mailerlite.com/jsonp/1667600/forms/160022650035373147/subscribe" method="post" data-success="/success">
             <div class="ml-form-formContent">
               <div class="ml-form-fieldRow ml-last-item">
                 <div class="ml-field-group ml-field-email ml-validate-email ml-validate-required">
@@ -64,27 +64,8 @@ const UnfilteredLandingPage = () => {
       script.async = true;
       document.body.appendChild(script);
     }
-    // Intercept MailerLite form submission and redirect on success
-    const interval = setInterval(() => {
-      const form = document.querySelector('#mlb2-28436674 form');
-      if (form && !form.dataset.listenerAdded) {
-        form.dataset.listenerAdded = 'true';
-        form.addEventListener('submit', function () {
-          // DO NOT preventDefault!
-          const observer = new MutationObserver(() => {
-            const success = document.querySelector('.ml-form-successBody.row-success');
-            if (success && success.style.display !== 'none') {
-              navigate('/success');
-              observer.disconnect();
-            }
-          });
-          observer.observe(form.parentElement.parentElement, { childList: true, subtree: true });
-        });
-        clearInterval(interval);
-      }
-    }, 300);
-    return () => clearInterval(interval);
-  }, [navigate]);
+    // Remove MutationObserver and form event interception logic
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
