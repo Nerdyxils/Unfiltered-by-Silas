@@ -56,7 +56,7 @@ html, body {
 }
 
 .nav-cta {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ef2d56 0%, #d91f4a 100%);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 50px;
@@ -68,9 +68,9 @@ html, body {
 }
 
 .nav-cta:hover {
-  background: linear-gradient(135deg, #5a6fd8 0%, #6b4a8a 100%);
+  background: linear-gradient(135deg, #d91f4a 0%, #c41a3d 100%);
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 4px 12px rgba(239, 45, 86, 0.4);
 }
 
 /* Main container */
@@ -105,7 +105,7 @@ html, body {
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(90deg, #ef2d56 0%, #d91f4a 100%);
 }
 
 /* Typography */
@@ -125,7 +125,7 @@ html, body {
 .logo-sub {
   display: block;
   font-size: 1.1rem;
-  color: #667eea;
+  color: #ef2d56;
   font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
@@ -160,9 +160,9 @@ html, body {
 }
 
 .form input[type="email"]:focus {
-  border-color: #667eea;
+  border-color: #ef2d56;
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+  box-shadow: 0 0 0 3px rgba(239, 45, 86, 0.2);
 }
 
 .form input[type="email"]::placeholder {
@@ -172,7 +172,7 @@ html, body {
 .form button {
   width: 100%;
   padding: 1rem 1.25rem;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #ef2d56 0%, #d91f4a 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -186,7 +186,7 @@ html, body {
 
 .form button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  box-shadow: 0 8px 25px rgba(239, 45, 86, 0.4);
 }
 
 .form button:active:not(:disabled) {
@@ -209,7 +209,7 @@ html, body {
 .quote-heading {
   font-size: 0.9rem;
   font-weight: 600;
-  color: #667eea;
+  color: #ef2d56;
   margin-bottom: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -232,16 +232,25 @@ html, body {
 /* Success state */
 .content h1 {
   color: #f7fafc;
-  margin-bottom: 1rem;
-  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1.3;
+  letter-spacing: -0.01em;
 }
 
 .content p {
   color: #cbd5e0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
   line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.content .nav-cta {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.75rem 1.5rem;
 }
 
 /* Error messages */
@@ -310,6 +319,22 @@ html, body {
     padding: 0.875rem 1rem;
     font-size: 0.95rem;
   }
+  
+  /* Success message mobile optimization */
+  .content h1 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .content p {
+    font-size: 0.8rem;
+    margin-bottom: 1.25rem;
+  }
+  
+  .content .nav-cta {
+    font-size: 0.85rem;
+    padding: 0.6rem 1.2rem;
+  }
 }
 
 @media (max-width: 480px) {
@@ -360,6 +385,22 @@ html, body {
     padding: 0.8rem 0.9rem;
     font-size: 0.9rem;
   }
+  
+  /* Success message small mobile optimization */
+  .content h1 {
+    font-size: 0.9rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .content p {
+    font-size: 0.75rem;
+    margin-bottom: 1rem;
+  }
+  
+  .content .nav-cta {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+  }
 }
 
 @media (max-width: 375px) {
@@ -388,6 +429,22 @@ html, body {
   .cta {
     font-size: 0.9rem;
   }
+  
+  /* Success message extra small mobile optimization */
+  .content h1 {
+    font-size: 0.85rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .content p {
+    font-size: 0.7rem;
+    margin-bottom: 0.875rem;
+  }
+  
+  .content .nav-cta {
+    font-size: 0.75rem;
+    padding: 0.45rem 0.8rem;
+  }
 }
 
 /* Smooth animations */
@@ -410,7 +467,7 @@ html, body {
 .form input[type="email"]:focus,
 .form button:focus,
 .nav-cta:focus {
-  outline: 2px solid #667eea;
+  outline: 2px solid #ef2d56;
   outline-offset: 2px;
 }
 

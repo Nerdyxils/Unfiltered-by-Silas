@@ -113,10 +113,10 @@ const UnfilteredLandingPage = () => {
       <div className="container">
         <div className="content" style={{ textAlign: 'center' }}>
           <img src={silasLogo} alt="Silas Logo" className="nav-logo" style={{ marginBottom: '1.5rem' }} />
-          <h1 className="main-title" style={{ color: '#3B8A7F', fontSize: '2.5rem', marginBottom: '1rem' }}>
+          <h1 className="main-title" style={{ color: '#3B8A7F', fontSize: '1.5rem', marginBottom: '1rem' }}>
         Congrats! You just joined the coolest newsletter you never asked for.
         </h1>   
-        <p className="cta" style={{ color: '#fff', fontSize: '1.2rem', marginBottom: '2rem' }}>
+        <p className="cta" style={{ color: '#fff', fontSize: '.9rem', marginBottom: '2rem' }}>
         Get ready for weird thoughts, hot takes, and the occasional meme you’ll pretend didn’t make you laugh.<br />
         Check your inbox (or spam, if your email’s being dramatic).
         </p>
